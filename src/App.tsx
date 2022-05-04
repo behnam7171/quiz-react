@@ -1,26 +1,52 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import {gql, useQuery} from "@apollo/client";
+import QuestionGenerator from "./components/QuestionGenerator/QuestionGenerator";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    const countries_query = gql`
+    {
+        countries  {
+            name,
+            code,
+            native,
+            phone,
+            continent {
+                code,
+                name
+            }
+            currency,
+            languages {
+                name,
+                code,
+                native,
+                rtl
+            },
+            emoji,
+            states {
+                code,
+                name
+            },
+            capital,
+        }
+    }`;
+
+    const {data, loading, error} = useQuery(countries_query);
+
+    const [countries, setCountries] = useState([]);
+
+    React.useEffect(() => {
+        if (data) {
+            setCountries(data.countries)
+        }
+    }, [data])
+
+    return (
+        <div className="App">
+            <QuestionGenerator ></QuestionGenerator>
+        </div>
+    );
 }
 
 export default App;
