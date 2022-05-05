@@ -4,15 +4,15 @@ import {QuestionBody} from "../../interfaces/question/question-body";
 
 interface QuestionProps {
     question: QuestionBody;
-    answerSubmittion: (isAnswer: boolean) => void;
+    answerSubmission: (isAnswer: boolean) => void;
 }
 
 
-const Question: FC<QuestionProps> = ({question, answerSubmittion}) => {
+const Question: FC<QuestionProps> = ({question, answerSubmission}) => {
 
     const answerSelected = (isAnswer: boolean) => {
         console.log(isAnswer);
-        answerSubmittion(isAnswer);
+        answerSubmission(isAnswer);
     }
 
     return (
@@ -24,7 +24,7 @@ const Question: FC<QuestionProps> = ({question, answerSubmittion}) => {
                     <button key={option.title} onClick={() => answerSelected(option.isAnswer)}>{option.title}</button>
                 ))}
             </div>
-            <div>question: {question.tip}</div>
+            <div className={styles.tip}>question: {question.tip}</div>
         </div>
     )
 };

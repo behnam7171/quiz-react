@@ -21,7 +21,7 @@ describe('<Question />', () => {
                 isAnswer: false,
             }],
             tip: 'Tehran!!! ofc'
-        }} answerSubmittion={(isAnswer) => {
+        }} answerSubmission={() => {
         }}/>);
 
         const question = screen.getByTestId('Question');

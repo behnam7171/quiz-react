@@ -1,5 +1,6 @@
 import {BaseEntity} from "./baseEntity";
 
 export interface Language extends BaseEntity {
-    native: string;
+    native?: string;
+    rtl: boolean;
 }

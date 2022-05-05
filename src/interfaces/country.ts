@@ -4,12 +4,12 @@ import {Language} from "./language";
 import {State} from "./state";
 
 export interface Country extends BaseEntity {
-    native: string
-    phone: string;
-    continent: Continent;
-    currency: string;
-    language: Language;
-    emoji: string;
-    state: State[];
+    native?: string
+    phone?: string;
+    continent?: Continent;
+    currency?: string;
+    languages?: Language[];
+    emoji?: string;
+    state?: State[];
     capital: string;
 }
