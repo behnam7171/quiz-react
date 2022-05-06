@@ -99,7 +99,6 @@ const QuestionGenerator: FC<QuestionGeneratorInput> = (data) => {
                                              src="https://i.kym-cdn.com/entries/icons/mobile/000/009/993/tumblr_m0wb2xz9Yh1r08e3p.jpg"></img>
                             }
                             title={score < 5 ? 'Seriously?! You need geography lesson!!' : score < 8 ? 'Hmm... Not Bad!' : 'You are good! Well done!!!'}
-                            subTitle="Go ahead, See how others did by clicking 'Leaderboard' on navigation bar"
                             extra={<Button type="primary">
                                 <Link to="/results/leaderboard">
                                     Leaderboard
