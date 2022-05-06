@@ -21,7 +21,7 @@ export abstract class QuestionStrategy {
 
         return  this.shuffle(allAnswers.map((answer, index) => {
             return {
-                title: answer.name,
+                title: answer.name !== "" ? answer.name : answer.code ? answer.code : answer.name,
                 isAnswer: index === 0
             }
         }));

@@ -30,12 +30,12 @@ const Leaderboard: FC = () => {
                                 <div className={styles.flex} key={index}>
                                     <div className={styles.item}>
                                         <div className={styles.info}>
-                                            <h3 className={styles.textDark}>{value.name}</h3>
+                                            <h3 title={value.name} className={styles.textDark}>{value.name}</h3>
                                             <span>{new Date(value.dateTime).toLocaleString()}</span>
                                         </div>
                                     </div>
                                     <div className={styles.item}>
-                                        <span>{value.score}</span>
+                                        <span className={styles.score}>{value.score}</span>
                                     </div>
                                 </div>
                             )
