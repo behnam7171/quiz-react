@@ -1,3 +1,7 @@
+# Briefing
+
+This Quiz is designed to generate 10 randomized questions in 4 different types (strategies). [https://countries.trevorblades.com/graphql](https://countries.trevorblades.com/graphql) is used for fetching data about languages, continents and countries. The UI is designed using [https://ant.design/](https://ant.design/). It also have leaderboard to see your results and also storing the results in localStorage so you can keep track of the leaderboard.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
