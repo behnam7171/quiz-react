@@ -1,15 +1,13 @@
-import React, {FormEventHandler, useState} from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import QuestionGenerator from "./components/QuestionGenerator/QuestionGenerator";
 import {gql, useQuery} from "@apollo/client";
-import {QuestionBody} from "./interfaces/question/question-body";
 import {Country} from "./interfaces/quiz/country";
 import {Continent} from "./interfaces/quiz/continent";
 import {Language} from "./interfaces/quiz/language";
-import Leaderboard from "./components/Leaderboard/Leaderboard";
 import {Button, Input} from "antd";
 
-function App(props: any) {
+function App() {
 
     const queries = {
         continents: gql`query MyQuery {
@@ -97,10 +95,10 @@ function App(props: any) {
     return (
         <div className="App">
             {!showQuizQuestions ? <form onSubmit={handleSubmit}>
-                <label>
-                    <div className="name">Please enter your name</div>
+                <div>
+                    <div className="name" >Please enter your name</div>
                     <Input className="name-input" placeholder="Name" value={name} onChange={nameChanged} />
-                </label>
+                </div>
                 <Button type="primary" htmlType="submit">
                     Submit
                 </Button>

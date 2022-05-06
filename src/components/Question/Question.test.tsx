@@ -5,7 +5,7 @@ import Question from './Question';
 
 describe('<Question />', () => {
     test('it should mount', () => {
-        render(<Question question={{
+        render(<Question questionNumber={1} question={{
             title: 'Where is capital of Iran',
             options: [{
                 title: 'tehran',

@@ -1,8 +1,7 @@
 import React, {FC} from 'react';
 import styles from './Layout.module.css';
-import {Link, Outlet, useLocation, useNavigate} from "react-router-dom";
+import {Link, Outlet, useLocation} from "react-router-dom";
 import {Layout, Menu} from 'antd';
-import {MenuClickEventHandler} from "rc-menu/lib/interface";
 
 interface LayoutProps {
 }

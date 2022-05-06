@@ -2,8 +2,7 @@ import React, {FC, useState} from 'react';
 import styles from './QuestionGenerator.module.css';
 import {QuestionBody} from "../../interfaces/question/question-body";
 import Question from "../Question/Question";
-import {useNavigate} from "react-router-dom";
-import {gql, useQuery} from "@apollo/client";
+import {Link} from "react-router-dom";
 import {CapitalOfCountryStrategy} from "./QuestionStrategies/capital-of-country-strategy";
 import {CountryInContinentStrategy} from "./QuestionStrategies/country-in-continent-strategy";
 import {RtlLanguageStrategy} from "./QuestionStrategies/rtl-language-strategy";
@@ -11,6 +10,7 @@ import {QuestionStrategy} from "./QuestionStrategies/question-strategy";
 import {LanguageOfCountryStrategy} from "./QuestionStrategies/language-of-country-strategy";
 import {QuestionStrategyInput} from "../../interfaces/question/question-strategy-input";
 import {LeaderboardProfile} from "../../interfaces/leaderboard/LeaderboardProfile";
+import {Button, Result} from "antd";
 
 interface QuestionGeneratorInput extends QuestionStrategyInput {
     name: string;
@@ -81,22 +81,36 @@ const QuestionGenerator: FC<QuestionGeneratorInput> = (data) => {
             {
                 !quizFinished ? (
                     <div className="question">
-                        {questions.length !== 0 ? <Question question={questions[currentQuestion]}
+
+                        {questions.length !== 0 ? <Question questionNumber={currentQuestion + 1} question={questions[currentQuestion]}
                                                             answerSubmission={answerSubmission}></Question> : null}
                     </div>
                 ) : (
+
                     <div className='result'>
-                        {
-                            score < 5 ? <img style={{marginBottom: "1em"}} height="200px" src="https://i.pinimg.com/736x/d6/3e/dd/d63edd9af879f866baea5e3c5b506959.jpg"></img> :
-                                score < 8 ? <img style={{marginBottom: "1em"}} height="200px" src="https://external-preview.redd.it/KccyhwbsmRR0ADdmpXkmnMnJfpp7cOBTTZQuLZ8V-to.jpg?auto=webp&s=bfc8c4af211d9c94dacb0090f435c750ff858e69"></img> :
-                                    <img style={{marginBottom: "1em"}} height="200px" src="https://i.kym-cdn.com/entries/icons/mobile/000/009/993/tumblr_m0wb2xz9Yh1r08e3p.jpg"></img>
-                        }
                         <h3>You scored {score} out of {questions.length}</h3>
-                        <h3>{score < 5 ? 'Seriously?! You need geography lesson!!' : score < 8 ? 'Hmm... Not Bad!' : 'You are good! Well done!!!'}</h3>
-                        <h3>{"Go ahead, See how others did by clicking 'Leaderboard' on navigation bar"}</h3>
+                        <Result
+                            icon={
+                                score < 5 ? <img style={{marginBottom: "1em"}} height="200px"
+                                                 src="https://i.pinimg.com/736x/d6/3e/dd/d63edd9af879f866baea5e3c5b506959.jpg"></img> :
+                                    score < 8 ? <img style={{marginBottom: "1em"}} height="200px"
+                                                     src="https://external-preview.redd.it/KccyhwbsmRR0ADdmpXkmnMnJfpp7cOBTTZQuLZ8V-to.jpg?auto=webp&s=bfc8c4af211d9c94dacb0090f435c750ff858e69"></img> :
+                                        <img style={{marginBottom: "1em"}} height="200px"
+                                             src="https://i.kym-cdn.com/entries/icons/mobile/000/009/993/tumblr_m0wb2xz9Yh1r08e3p.jpg"></img>
+                            }
+                            title={score < 5 ? 'Seriously?! You need geography lesson!!' : score < 8 ? 'Hmm... Not Bad!' : 'You are good! Well done!!!'}
+                            subTitle="Go ahead, See how others did by clicking 'Leaderboard' on navigation bar"
+                            extra={<Button type="primary">
+                                <Link to="/results/leaderboard">
+                                    Leaderboard
+                                </Link>
+                            </Button>}
+                        />
+
                     </div>
                 )
             }
+
         </div>
     )
 };

@@ -8,6 +8,19 @@ body {
   overflow: hidden;
 }
 
+
+@font-face {
+  font-family: NotoColorEmojiLimited;
+  unicode-range: U+1F1E6-1F1FF;
+  src: url(https://raw.githack.com/googlefonts/noto-emoji/main/fonts/NotoColorEmoji.ttf);
+}
+
+.ant-popover-inner-content {
+  font-family: 'NotoColorEmojiLimited', -apple-system, BlinkMacSystemFont,
+  'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+  'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+
 #root {
   height: 100%;
 }
@@ -23,6 +36,7 @@ code {
   align-items: center;
   justify-content: center;
   background: #fff;
+  padding: 0 5em;
 }
 .logo {
   float: left;

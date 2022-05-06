@@ -1,6 +1,5 @@
 import React, {FC, useState} from 'react';
 import styles from './Leaderboard.module.css';
-import {useLocation} from "react-router-dom";
 import {LeaderboardProfile} from "../../interfaces/leaderboard/LeaderboardProfile";
 
 
