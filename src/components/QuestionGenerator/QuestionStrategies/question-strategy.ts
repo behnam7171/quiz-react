@@ -1,6 +1,6 @@
 import {QuestionStrategyInput} from "../../../interfaces/question/question-strategy-input";
 import {QuestionBody} from "../../../interfaces/question/question-body";
-import {BaseEntity} from "../../../interfaces/baseEntity";
+import {BaseEntity} from "../../../interfaces/quiz/baseEntity";
 import shuffle from "lodash.shuffle"
 import {Option} from "../../../interfaces/question/option";
 

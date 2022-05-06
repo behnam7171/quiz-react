@@ -10,9 +10,13 @@ import {RtlLanguageStrategy} from "./QuestionStrategies/rtl-language-strategy";
 import {QuestionStrategy} from "./QuestionStrategies/question-strategy";
 import {LanguageOfCountryStrategy} from "./QuestionStrategies/language-of-country-strategy";
 import {QuestionStrategyInput} from "../../interfaces/question/question-strategy-input";
+import {LeaderboardProfile} from "../../interfaces/leaderboard/LeaderboardProfile";
 
+interface QuestionGeneratorInput extends QuestionStrategyInput {
+    name: string;
+}
 
-const QuestionGenerator: FC<QuestionStrategyInput> = (data) => {
+const QuestionGenerator: FC<QuestionGeneratorInput> = (data) => {
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [quizFinished, setQuizFinished] = useState(false);
     const [questions, setQuestions] = useState<QuestionBody[]>([]);
@@ -56,12 +60,21 @@ const QuestionGenerator: FC<QuestionStrategyInput> = (data) => {
             setCurrentQuestion(nextQuestion);
         } else {
             setQuizFinished(true);
+
+            const result: LeaderboardProfile = {
+                name: data.name,
+                dateTime: new Date(),
+                score: score
+            }
+
+            const leaderboardProfiles: LeaderboardProfile[] = JSON.parse(localStorage.getItem("leaderboard") || JSON.stringify([]));
+            const updatedLeaderboard = JSON.stringify([...[result], ...leaderboardProfiles])
+
+            localStorage.setItem("leaderboard", updatedLeaderboard);
+
         }
     };
 
-
-    let navigate = useNavigate();
-    const NavigateToLeaderboard = () => navigate('/results/leaderboard', {replace: true});
 
     return (
         <div className={styles.QuestionGenerator} data-testid="QuestionGenerator">
@@ -73,8 +86,14 @@ const QuestionGenerator: FC<QuestionStrategyInput> = (data) => {
                     </div>
                 ) : (
                     <div className='result'>
-                        You scored {score} out of {questions.length}
-                        <button onClick={NavigateToLeaderboard}>Leaderboard</button>
+                        {
+                            score < 5 ? <img style={{marginBottom: "1em"}} height="200px" src="https://i.pinimg.com/736x/d6/3e/dd/d63edd9af879f866baea5e3c5b506959.jpg"></img> :
+                                score < 8 ? <img style={{marginBottom: "1em"}} height="200px" src="https://external-preview.redd.it/KccyhwbsmRR0ADdmpXkmnMnJfpp7cOBTTZQuLZ8V-to.jpg?auto=webp&s=bfc8c4af211d9c94dacb0090f435c750ff858e69"></img> :
+                                    <img style={{marginBottom: "1em"}} height="200px" src="https://i.kym-cdn.com/entries/icons/mobile/000/009/993/tumblr_m0wb2xz9Yh1r08e3p.jpg"></img>
+                        }
+                        <h3>You scored {score} out of {questions.length}</h3>
+                        <h3>{score < 5 ? 'Seriously?! You need geography lesson!!' : score < 8 ? 'Hmm... Not Bad!' : 'You are good! Well done!!!'}</h3>
+                        <h3>{"Go ahead, See how others did by clicking 'Leaderboard' on navigation bar"}</h3>
                     </div>
                 )
             }

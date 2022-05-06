@@ -5,7 +5,7 @@ import QuestionGenerator from './QuestionGenerator';
 
 describe('<QuestionGenerator />', () => {
   test('it should mount', () => {
-    render(<QuestionGenerator />);
+    render(<QuestionGenerator name={''} />);
     
     const questionGenerator = screen.getByTestId('QuestionGenerator');
 

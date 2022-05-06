@@ -5,7 +5,7 @@ import Leaderboard from './Leaderboard';
 
 describe('<Leaderboard />', () => {
   test('it should mount', () => {
-    render(<Leaderboard />);
+    render(<Leaderboard  />);
     
     const leaderboard = screen.getByTestId('Leaderboard');
 

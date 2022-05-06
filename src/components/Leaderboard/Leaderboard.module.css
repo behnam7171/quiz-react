@@ -1,1 +1,70 @@
 .Leaderboard {}
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* > * {
+    font-family: "Poppins", cursive;
+    margin: 0;
+}
+
+:root{
+    --color-dark: #2C3131;
+    --color-light: #F3F3F2;
+}
+
+.main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+    height: 100%;
+}
+
+.leaderboard{
+    margin: 2em 0;
+}
+
+.board {
+    text-align: center;
+    height: 100%;
+}
+
+.active{
+    background-color: var(--color-dark);
+    color: var(--color-light);
+}
+
+.profile{
+    display: flex;
+    margin-top: 3em;
+    flex-direction: column;
+    height: calc(100% - 12.5em);
+    overflow: auto;
+}
+
+.flex{
+    display: flex;
+    justify-content: space-between;
+    gap: 20em;
+    text-align: left;
+    margin-bottom: 2em;
+}
+
+.item{
+    display: flex;
+    align-items: center;
+}
+
+
+.info{
+    padding: 1em;
+}
+
+.text-dark{
+    color: var(--color-dark);
+    margin-inline-end: 1em;
+}
+
+h3, h1 {
+    font-weight: bold;
+    margin-bottom: 0;
+}

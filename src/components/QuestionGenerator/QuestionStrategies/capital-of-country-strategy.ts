@@ -1,7 +1,7 @@
 import {QuestionBody} from "../../../interfaces/question/question-body";
 import {QuestionStrategyInput} from "../../../interfaces/question/question-strategy-input";
 import {QuestionStrategy} from "./question-strategy";
-import {BaseEntity} from "../../../interfaces/baseEntity";
+import {BaseEntity} from "../../../interfaces/quiz/baseEntity";
 
 export class CapitalOfCountryStrategy extends QuestionStrategy {
     generate(data: QuestionStrategyInput): QuestionBody {

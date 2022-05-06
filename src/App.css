@@ -2,10 +2,19 @@
   text-align: center;
 }
 
+.name {
+  margin-bottom: 1em;
+}
+
+.name-input {
+  margin-bottom: 1em;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
+@import '~antd/dist/antd.css';
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

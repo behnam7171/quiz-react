@@ -1,6 +1,6 @@
-import {Language} from "../language";
-import {Continent} from "../continent";
-import {Country} from "../country";
+import {Language} from "../quiz/language";
+import {Continent} from "../quiz/continent";
+import {Country} from "../quiz/country";
 
 export interface QuestionStrategyInput {
     languages?: Language[];

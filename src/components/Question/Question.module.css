@@ -7,10 +7,6 @@
     src: url(https://raw.githack.com/googlefonts/noto-emoji/main/fonts/NotoColorEmoji.ttf);
 }
 
-div {
-    color: red;
-}
-
 .tip {
     font-family: 'NotoColorEmojiLimited', -apple-system, BlinkMacSystemFont,
     'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji',

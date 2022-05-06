@@ -3,11 +3,13 @@ import './App.css';
 import QuestionGenerator from "./components/QuestionGenerator/QuestionGenerator";
 import {gql, useQuery} from "@apollo/client";
 import {QuestionBody} from "./interfaces/question/question-body";
-import {Country} from "./interfaces/country";
-import {Continent} from "./interfaces/continent";
-import {Language} from "./interfaces/language";
+import {Country} from "./interfaces/quiz/country";
+import {Continent} from "./interfaces/quiz/continent";
+import {Language} from "./interfaces/quiz/language";
+import Leaderboard from "./components/Leaderboard/Leaderboard";
+import {Button, Input} from "antd";
 
-function App() {
+function App(props: any) {
 
     const queries = {
         continents: gql`query MyQuery {
@@ -94,14 +96,17 @@ function App() {
 
     return (
         <div className="App">
-            <form onSubmit={handleSubmit}>
+            {!showQuizQuestions ? <form onSubmit={handleSubmit}>
                 <label>
-                    Name:
-                    <input type="text" value={name} onChange={nameChanged}/>
+                    <div className="name">Please enter your name</div>
+                    <Input className="name-input" placeholder="Name" value={name} onChange={nameChanged} />
                 </label>
-                <input type="submit" value="Lets start"/>
-            </form>
-            {showQuizQuestions ? (<QuestionGenerator countries={countries} continents={continents} languages={languages}></QuestionGenerator>) : null}
+                <Button type="primary" htmlType="submit">
+                    Submit
+                </Button>
+            </form> : null}
+            {showQuizQuestions ? (<QuestionGenerator name={name} countries={countries} continents={continents}
+                                                     languages={languages}></QuestionGenerator>) : null}
         </div>
     );
 }
