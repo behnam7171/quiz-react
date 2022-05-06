@@ -65,6 +65,7 @@
 .text-dark{
     color: var(--color-dark);
     margin-inline-end: 1em;
+
 }
 
 h3, h1 {
@@ -72,8 +73,3 @@ h3, h1 {
     margin-bottom: 0;
 }
 
-h3 {
-    max-width: 7em;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}

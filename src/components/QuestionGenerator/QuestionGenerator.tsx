@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, MouseEventHandler, useState} from 'react';
 import styles from './QuestionGenerator.module.css';
 import {QuestionBody} from "../../interfaces/question/question-body";
 import Question from "../Question/Question";
@@ -21,6 +21,7 @@ const QuestionGenerator: FC<QuestionGeneratorInput> = (data) => {
     const [quizFinished, setQuizFinished] = useState(false);
     const [questions, setQuestions] = useState<QuestionBody[]>([]);
     const [score, setScore] = useState(0);
+    const [fiftyFiftyUsed, setFiftyFiftyUsed] = useState(false);
 
 
     const capitalOfCountryStrategy = new CapitalOfCountryStrategy();
@@ -75,15 +76,31 @@ const QuestionGenerator: FC<QuestionGeneratorInput> = (data) => {
         }
     };
 
+    const fiftyFiftyClicked = (event: any) => {
+        setFiftyFiftyUsed(true);
+        let counter = 0;
+        questions[currentQuestion].options.map(option => {
+            if (!option.isAnswer && counter < 2) {
+                option.title = "";
+                counter = counter + 1;
+            }
+        })
+        event.preventDefault();
+    }
+
 
     return (
         <div className={styles.QuestionGenerator} data-testid="QuestionGenerator">
             {
                 !quizFinished ? (
-                    <div className="question">
 
-                        {questions.length !== 0 ? <Question questionNumber={currentQuestion + 1} question={questions[currentQuestion]}
-                                                            answerSubmission={answerSubmission}></Question> : null}
+                    <div className="question">
+                        <div className={styles.guidance}>
+                            <Button disabled={fiftyFiftyUsed} onClick={fiftyFiftyClicked}>50/50</Button>
+                        </div>
+                        {questions.length !== 0 ?
+                            <Question questionNumber={currentQuestion + 1} question={questions[currentQuestion]}
+                                      answerSubmission={answerSubmission}></Question> : null}
                     </div>
                 ) : (
 

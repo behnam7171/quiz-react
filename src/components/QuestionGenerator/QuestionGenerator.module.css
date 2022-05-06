@@ -1,1 +1,7 @@
 .QuestionGenerator {}
+
+.guidance {
+    display: flex;
+    margin-bottom: 1em;
+    justify-content: center;
+}
