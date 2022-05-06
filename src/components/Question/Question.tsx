@@ -36,7 +36,7 @@ const Question: FC<QuestionProps> = ({question,questionNumber, answerSubmission}
                     {question?.options.map((option, index) => {
                         return (
                             <Col xs={{span: 12}} lg={{span: 12}}>
-                                <Button title={option.title} style={{width: "100%"}} key={option.title}
+                                <Button disabled={option.title === ""} title={option.title} style={{width: "100%"}} key={option.title}
                                         onClick={() => answerSelected(option.isAnswer)}>
                                     <div style={{
                                         overflow: "hidden",
