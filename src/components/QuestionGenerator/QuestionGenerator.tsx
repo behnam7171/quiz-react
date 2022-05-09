@@ -1,4 +1,4 @@
-import React, {FC, MouseEventHandler, useState} from 'react';
+import React, {FC, useState} from 'react';
 import styles from './QuestionGenerator.module.css';
 import {QuestionBody} from "../../interfaces/question/question-body";
 import Question from "../Question/Question";
@@ -10,7 +10,8 @@ import {QuestionStrategy} from "./QuestionStrategies/question-strategy";
 import {LanguageOfCountryStrategy} from "./QuestionStrategies/language-of-country-strategy";
 import {QuestionStrategyInput} from "../../interfaces/question/question-strategy-input";
 import {LeaderboardProfile} from "../../interfaces/leaderboard/LeaderboardProfile";
-import {Button, Result} from "antd";
+import {Button, Modal, Result} from "antd";
+import {PhoneOutlined} from "@ant-design/icons";
 
 interface QuestionGeneratorInput extends QuestionStrategyInput {
     name: string;
@@ -22,6 +23,8 @@ const QuestionGenerator: FC<QuestionGeneratorInput> = (data) => {
     const [questions, setQuestions] = useState<QuestionBody[]>([]);
     const [score, setScore] = useState(0);
     const [fiftyFiftyUsed, setFiftyFiftyUsed] = useState(false);
+    const [phoneCallUsed, setPhoneCallUsed] = useState(false);
+    const [isModalVisible, setIsModalVisible] = useState(false);
 
 
     const capitalOfCountryStrategy = new CapitalOfCountryStrategy();
@@ -88,15 +91,31 @@ const QuestionGenerator: FC<QuestionGeneratorInput> = (data) => {
         event.preventDefault();
     }
 
+    const phoneCallClicked = (event: any) => {
+        const answer = questions[currentQuestion].options.find(option => option.isAnswer)
+        if (answer) {
+            setPhoneCallUsed(true);
+            Modal.info({
+                content: (<p>Well my friend! in my opinion, {answer.title} is the answer!</p>),
+            });
+        } else {
+            Modal.info({
+                content: (<p>You can not use help for this question!</p>),
+            });
+        }
+        event.preventDefault();
+    }
 
     return (
         <div className={styles.QuestionGenerator} data-testid="QuestionGenerator">
             {
                 !quizFinished ? (
-
                     <div className="question">
                         <div className={styles.guidance}>
-                            <Button disabled={fiftyFiftyUsed} onClick={fiftyFiftyClicked}>50/50</Button>
+                            <Button className={styles.help} disabled={fiftyFiftyUsed}
+                                    onClick={fiftyFiftyClicked}>50/50</Button>
+                            <Button className={styles.help} disabled={phoneCallUsed} icon={<PhoneOutlined/>}
+                                    onClick={phoneCallClicked}></Button>
                         </div>
                         {questions.length !== 0 ?
                             <Question questionNumber={currentQuestion + 1} question={questions[currentQuestion]}

@@ -5,7 +5,7 @@ import {gql, useQuery} from "@apollo/client";
 import {Country} from "./interfaces/quiz/country";
 import {Continent} from "./interfaces/quiz/continent";
 import {Language} from "./interfaces/quiz/language";
-import {Button, Input} from "antd";
+import {Button, Col, Input, Modal, Row} from "antd";
 
 function App() {
 
@@ -87,24 +87,40 @@ function App() {
     }
 
     const handleSubmit = (event: any) => {
-        setName(name)
-        setShowQuizQuestions(true);
+        if (validate()) {
+            setName(name)
+            setShowQuizQuestions(true);
+        } else {
+            Modal.error({
+                content: (<p>Please enter a name!</p>),
+            });
+        }
         event.preventDefault();
+    }
+
+    const validate = () => {
+        return name !== '' && name != undefined;
     }
 
     return (
         <div className="App">
-            {!showQuizQuestions ? <form onSubmit={handleSubmit}>
-                <div>
-                    <div className="name" >Please enter your name</div>
-                    <Input className="name-input" placeholder="Name" value={name} onChange={nameChanged} />
-                </div>
-                <Button type="primary" htmlType="submit">
-                    Submit
-                </Button>
-            </form> : null}
-            {showQuizQuestions ? (<QuestionGenerator name={name} countries={countries} continents={continents}
-                                                     languages={languages}></QuestionGenerator>) : null}
+            <Row>
+                <Col span={12} offset={6}>
+                    {!showQuizQuestions ? <form onSubmit={handleSubmit}>
+                        <div>
+                            <div className="name">Please enter your name</div>
+                            <Input className="name-input" placeholder="Name" value={name}
+                                   onChange={nameChanged}/>
+                        </div>
+                        <Button type="primary" htmlType="submit">
+                            Submit
+                        </Button>
+                    </form> : null}
+                    {showQuizQuestions ? (<QuestionGenerator name={name} countries={countries} continents={continents}
+                                                             languages={languages}></QuestionGenerator>) : null}
+                </Col>
+            </Row>
+
         </div>
     );
 }

@@ -5,3 +5,7 @@
     margin-bottom: 1em;
     justify-content: center;
 }
+
+.help {
+    margin-inline-end: 0.5em;
+}
